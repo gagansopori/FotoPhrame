@@ -52,7 +52,7 @@ class InstagramUpdate():
 		for i in range(0,media_count):
 			
 			postLink = query['data'][i]['images']['standard_resolution']['url']
-			img = urllib.request.urlretrieve(postLink,"D:/Python3/PlayMirror/pf/%s.jpg" %(i))
+			img = urllib.request.urlretrieve(postLink,"../directory goes here/%s.jpg" %(i))
 
 			image = Image.open("D:/Python3/PlayMirror/pf/%s.jpg" %(i))
 			# image = image.resize((400,400), Image.ANTIALIAS)
