@@ -9,9 +9,9 @@ import requests
 # Instagram Updates using the Instagram API
 class InstagramUpdate():
 
-	# client_id = '993a3c6b93bc4180b77bf3fc22dcddd7'
-	# redirect_url = 'https://www.projectsbysopori.in/'
-	access_token = '1136723953.993a3c6.20cfad497d6a4e75bf356d047d761b27'
+	# client_id = 'get your own by registering for it'
+	# redirect_url = 'yourwebsite from where you can access Access token using Oauth 2.0/'
+	access_token = 'get your own from instagram'
 
 	
 	# def __init__(self, parent, *args, **kwargs):
@@ -56,7 +56,7 @@ class InstagramUpdate():
 
 			image = Image.open("D:/Python3/PlayMirror/pf/%s.jpg" %(i))
 			# image = image.resize((400,400), Image.ANTIALIAS)
-			image.save("D:/Python3/PlayMirror/pf/ig_%s.png" %(i))
+			image.save("../add your path here/ig_%s.png" %(i))
 
 
 
