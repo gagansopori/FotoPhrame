@@ -2,30 +2,13 @@ from tkinter import *
 from PIL import Image, ImageTk
 import urllib.request, json
 import requests
-
-
+import random
 
 
 # Instagram Updates using the Instagram API
-class InstagramUpdate():
+class InstagramUpdate:
 
-	# client_id = 'get your own by registering for it'
-	# redirect_url = 'yourwebsite from where you can access Access token using Oauth 2.0/'
-	access_token = 'get your own from instagram'
-
-	
-	# def __init__(self, parent, *args, **kwargs):
-
-	# 	Frame.__init__(self, parent, bg = 'black')
-
-	# 	self.frame = Frame(self, bg = 'black')				#create the frame
-	# 	self.frame.pack(side = TOP, anchor = W)				#pack the frame
-
-		
-	# 	#photo
-	# 	self.photoLabel = Label(self.frame, bg = 'black', height = 400, width = 400)
-	# 	self.photoLabel.pack(side = LEFT, anchor = N, padx = 10)	
-	
+	access_token = 'get your own @ api.instagram.com'		
 
 
 	def getUserInfo(user):
@@ -52,11 +35,28 @@ class InstagramUpdate():
 		for i in range(0,media_count):
 			
 			postLink = query['data'][i]['images']['standard_resolution']['url']
-			img = urllib.request.urlretrieve(postLink,"../directory goes here/%s.jpg" %(i))
+			img = urllib.request.urlretrieve(postLink,"D:/Python3/PlayMirror/pf/%s.jpg" %(i))
 
-			image = Image.open("D:/Python3/PlayMirror/pf/%s.jpg" %(i))
+			image = Image.open("..//your directory goes here/%s.jpg" %(i))
 			# image = image.resize((400,400), Image.ANTIALIAS)
-			image.save("../add your path here/ig_%s.png" %(i))
+			image.save("..//your directory goes here/ig_%s.png" %(media_count-i))
+
+
+
+	def showPhoto(photoCanvas, pCanvas):
+		
+		# to generate photos randomly
+		number = random.randint(61,79)
+
+		# loading the image element to be displayed on the canvas
+		photo = PhotoImage(file = '..//your directory goes here/ig_%d.png' %(number))
+
+		# Loading the image onto the canvas
+		pCanvas.create_image(0,0, image = photo, anchor = 'nw')
+		pCanvas.image = photo
+		
+		# Recursive call
+		pCanvas.after(10000, photoCanvas.showPhoto, pCanvas)
 
 
 
@@ -67,8 +67,14 @@ I_Up = InstagramUpdate()
 
 # getting the total no. of posts by the user
 media_count = I_Up.getUserInfo()
-
 # getting the most recent posts
 I_Up.getRecentMedia(media_count)
+
+# Initializing the Canvas onto which the image will be loaded
+pCanvas = Canvas(background = 'black', width = 640, height = 640)			# the dimensions can be edited as per the user requirements.
+pCanvas.pack(fill = 'both', expand = True)
+
+# displaying the Photo
+I_Up.showPhoto(pCanvas)
 
 root.mainloop()
