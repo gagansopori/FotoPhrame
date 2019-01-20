@@ -46,7 +46,7 @@ class InstagramUpdate:
 	def showPhoto(photoCanvas, pCanvas):
 		
 		# to generate photos randomly
-		number = random.randint(61,79)
+		number = random.randint(61,79)		# using this to fetch images saved in line 42
 
 		# loading the image element to be displayed on the canvas
 		photo = PhotoImage(file = '..//your directory goes here/ig_%d.png' %(number))
