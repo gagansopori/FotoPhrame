@@ -8,12 +8,16 @@ import random
 # Instagram Updates using the Instagram API
 class InstagramUpdate:
 
-	access_token = 'get your own @ api.instagram.com'		
+	# Important Step. Pulling access-tokens from a json file that contains all api keys. Process for increased security.
+	query = open("..//your directory goes here/.../credentials.json", "r")
+	response = json.loads(query.read())
+	access_token = response['keys']['instagram_id']	
 
 
 	def getUserInfo(user):
 		
 		user_url = 'https://api.instagram.com/v1/users/self/?access_token=%s' %(user.access_token)
+		
 		req = urllib.request.urlopen(user_url)
 		response = req.read().decode('utf-8')
 		query = json.loads(response)
@@ -31,28 +35,27 @@ class InstagramUpdate:
 		query = json.loads(response)
 		req.close()
 
-		
 		for i in range(0,media_count):
 			
 			postLink = query['data'][i]['images']['standard_resolution']['url']
 			img = urllib.request.urlretrieve(postLink,"D:/Python3/PlayMirror/pf/%s.jpg" %(i))
 
-			image = Image.open("..//your directory goes here/%s.jpg" %(i))
+			image = Image.open("D:/Python3/PlayMirror/pf/%s.jpg" %(i))
 			# image = image.resize((400,400), Image.ANTIALIAS)
-			image.save("..//your directory goes here/ig_%s.png" %(media_count-i))
+			image.save("D:/Python3/PlayMirror/pf/ig_%s.png" %(media_count-i))
 
 
 
 	def showPhoto(photoCanvas, pCanvas):
 		
 		# to generate photos randomly
-		number = random.randint(61,79)		# using this to fetch images saved in line 42
+		number = random.randint(61,79)
 
 		# loading the image element to be displayed on the canvas
-		photo = PhotoImage(file = '..//your directory goes here/ig_%d.png' %(number))
+		photo = PhotoImage(file = 'D:/Python3/PlayMirror/pf/ig_%d.png' %(number))
 
 		# Loading the image onto the canvas
-		pCanvas.create_image(0,0, image = photo, anchor = 'nw')
+		pCanvas.create_image(320,320, image = photo, anchor = 'center')
 		pCanvas.image = photo
 		
 		# Recursive call
